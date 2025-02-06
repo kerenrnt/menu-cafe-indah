@@ -1,0 +1,87 @@
+@media (max-width: 640px) { /* Untuk layar HP */
+    .menu-container {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+    /* Untuk layar kecil (iPhone SE, Android kecil) */
+@media screen and (max-width: 375px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Untuk layar medium (iPhone 11-14, Samsung A & S) */
+@media screen and (max-width: 430px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+/* Untuk layar besar (iPhone Pro Max, Pixel 6) */
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+/* Untuk layar kecil (iPhone SE, Android kecil) */
+@media screen and (max-width: 375px) {
+    body {
+        font-size: 14px;
+    }
+}
+
+/* Untuk layar medium (iPhone 11-14, Samsung A & S) */
+@media screen and (max-width: 430px) {
+    body {
+        font-size: 16px;
+    }
+}
+
+/* Untuk layar besar (iPhone Pro Max, Pixel 6) */
+@media screen and (max-width: 480px) {
+    body {
+        font-size: 18px;
+    }
+}
+
+
+    .opacity-0 {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    
+    .opacity-100 {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .category-card {
+        width: 100%; /* Agar penuh di layar HP */
+    }
+
+    .item-card {
+        flex-direction: column;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .quantity-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    button {
+        font-size: 14px;
+        padding: 8px;
+        transition: transform 0.2s ease, background-color 0.2s ease;
+    }
+    
+    button:hover {
+        transform: scale(1.1);
+    }
+
+
+}
