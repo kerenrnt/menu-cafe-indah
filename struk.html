@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Struk Pembayaran</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background-color: #f8f9fa;
+            padding: 20px;
+        }
+        .struk-container {
+            max-width: 400px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #28a745;
+            margin-bottom: 5px;
+        }
+        .alamat {
+            font-size: 12px;
+            color: #666;
+        }
+        .divider {
+            border-top: 2px dashed #ddd;
+            margin: 10px 0;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+            text-align: left;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            padding: 5px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .total {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-top: 10px;
+        }
+        .thank-you {
+            font-style: italic;
+            color: #555;
+            margin-top: 15px;
+        }
+        .btn-home {
+            display: inline-block;
+            margin-top: 15px;
+            padding: 10px 15px;
+            background: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-home:hover {
+            background: #218838;
+        }
+    </style>
+</head>
+<body>
+    <div class="struk-container">
+        <h2>Café Indah</h2>
+        <p class="alamat">Jl. Pinggir Laut, Kota Parepare</p>
+        
+        <div class="divider"></div>
+        
+        <h3>Struk Pembayaran</h3>
+        <ul id="order-list"></ul>
+        
+        <div class="divider"></div>
+        
+        <p class="total">Total: <span id="total-price"></span></p>
+        <p class="thank-you">Terima kasih telah berbelanja di Cafe Indah!</p>
+        
+        <a href="index.html" class="btn-home">Kembali ke Menu</a>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let cart = JSON.parse(localStorage.getItem("cart")) || {};
+            let orderList = document.getElementById("order-list");
+            let totalPrice = 0;
+
+            Object.entries(cart).forEach(([itemName, quantity]) => {
+                let price = parseInt(localStorage.getItem(`price-${itemName}`) || "0");
+                let totalItemPrice = price * quantity;
+                totalPrice += totalItemPrice;
+
+                let listItem = document.createElement("li");
+                listItem.innerHTML = `<span>${itemName} x ${quantity}</span> <span>Rp ${totalItemPrice.toLocaleString("id-ID")}</span>`;
+                orderList.appendChild(listItem);
+            });
+
+            document.getElementById("total-price").textContent = `Rp ${totalPrice.toLocaleString("id-ID")}`;
+
+            // Hapus data keranjang setelah struk ditampilkan
+            localStorage.removeItem("cart");
+        });
+    </script>
+</body>
+</html>
