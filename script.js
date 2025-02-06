@@ -347,17 +347,32 @@ function confirmPayment() {
     let message = selectedPaymentMethod === "cash" ? "Pembayaran berhasil secara tunai!" : "Pembayaran berhasil dengan QRIS!";
     alert(message);
 
-    // Kosongkan keranjang setelah pembayaran
-    cart = {};  // Mengosongkan objek keranjang
-    
-    // Update tampilan keranjang dan ikon keranjang
-    updateCartDisplay();
-    updateCartIcon();
+    // Simpan data harga ke localStorage agar bisa digunakan di struk.html
+    Object.entries(cart).forEach(([itemName, quantity]) => {
+        let price = getPriceByItemName(itemName); // Fungsi untuk mendapatkan harga item
+        localStorage.setItem(`price-${itemName}`, price);
+    });
 
-    
+    // Simpan keranjang ke localStorage agar bisa ditampilkan di struk.html
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Redirect ke halaman struk
+    window.location.href = "struk.html";
 }
 
-// Fungsi untuk memperbarui tampilan keranjang belanja
+// Fungsi untuk mendapatkan harga berdasarkan nama item
+function getPriceByItemName(itemName) {
+    let price = 0;
+    menuData.forEach(category => {
+        category.items.forEach(item => {
+            if (item.name === itemName) {
+                price = item.price;
+            }
+        });
+    });
+    return price;
+}
+
 // Fungsi untuk memperbarui tampilan keranjang belanja
 function updateCartDisplay() {
     const cartItemsContainer = document.getElementById("cart-items");
@@ -443,3 +458,4 @@ document.addEventListener("DOMContentLoaded", () => {
     filterMenu("all");
     updateCartIcon();
 });
+
